@@ -1,0 +1,30 @@
+# Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# Environment
+.env
+
+# Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.*
+terraform.tfvars
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Lambda packages
+*.zip
+
+# Uploaded filesuy
+uploads/
+
+# Sample documents (unless they're intentionally included)
+sample.pdf

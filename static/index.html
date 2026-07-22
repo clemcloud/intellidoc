@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>IntelliDoc</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #0f1115;
+            color: #e5e7eb;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 60px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 640px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        header p {
+            color: #9ca3af;
+            margin-top: 8px;
+        }
+
+        .card {
+            background: #171a21;
+            border: 1px solid #262b36;
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        .dropzone {
+            border: 2px dashed #333846;
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .dropzone:hover,
+        .dropzone.dragover {
+            border-color: #818cf8;
+            background: #1c2030;
+        }
+
+        .dropzone p {
+            color: #9ca3af;
+        }
+
+        .dropzone .filename {
+            color: #e5e7eb;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #6366f1, #a855f7);
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        button:hover:not(:disabled) {
+            opacity: 0.9;
+        }
+
+        .status {
+            text-align: center;
+            margin-top: 16px;
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+
+        .results {
+            margin-top: 28px;
+            display: none;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #312e81;
+            color: #c7d2fe;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .result-section {
+            background: #10131a;
+            border: 1px solid #262b36;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .result-section h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #818cf8;
+            margin-bottom: 10px;
+        }
+
+        .result-section p,
+        .result-section li {
+            color: #d1d5db;
+            line-height: 1.6;
+        }
+
+        .result-section ul {
+            padding-left: 20px;
+        }
+
+        .error-box {
+            background: #2a1215;
+            border: 1px solid #7f1d1d;
+            color: #fca5a5;
+            padding: 14px;
+            border-radius: 10px;
+            margin-top: 16px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <h1>📄 IntelliDoc</h1>
+            <p>Upload a document and get an instant AI-powered analysis</p>
+        </header>
+
+        <div class="card">
+            <div class="dropzone" id="dropzone">
+                <p>Drag & drop a PDF or DOCX here, or click to choose</p>
+                <div class="filename" id="filename"></div>
+                <input type="file" id="fileInput" accept=".pdf,.docx">
+            </div>
+
+            <button id="analyzeBtn" disabled>Analyze Document</button>
+            <div class="status" id="status"></div>
+            <div class="error-box" id="errorBox"></div>
+
+            <div class="results" id="results">
+                <span class="badge" id="docType"></span>
+
+                <div class="result-section">
+                    <h3>Summary</h3>
+                    <p id="summary"></p>
+                </div>
+
+                <div class="result-section">
+                    <h3>Key Points</h3>
+                    <ul id="keyPoints"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = "";
+
+        const dropzone = document.getElementById("dropzone");
+        const fileInput = document.getElementById("fileInput");
+        const filenameEl = document.getElementById("filename");
+        const analyzeBtn = document.getElementById("analyzeBtn");
+        const statusEl = document.getElementById("status");
+        const errorBox = document.getElementById("errorBox");
+        const results = document.getElementById("results");
+
+        let selectedFile = null;
+
+        dropzone.addEventListener("click", () => fileInput.click());
+
+        dropzone.addEventListener("dragover", (e) => {
+            e.preventDefault();
+            dropzone.classList.add("dragover");
+        });
+
+        dropzone.addEventListener("dragleave", () => dropzone.classList.remove("dragover"));
+
+        dropzone.addEventListener("drop", (e) => {
+            e.preventDefault();
+            dropzone.classList.remove("dragover");
+            if (e.dataTransfer.files.length) setFile(e.dataTransfer.files[0]);
+        });
+
+        fileInput.addEventListener("change", () => {
+            if (fileInput.files.length) setFile(fileInput.files[0]);
+        });
+
+        function setFile(file) {
+            selectedFile = file;
+            filenameEl.textContent = file.name;
+            analyzeBtn.disabled = false;
+            results.style.display = "none";
+            errorBox.style.display = "none";
+        }
+
+        analyzeBtn.addEventListener("click", async () => {
+            if (!selectedFile) return;
+
+            analyzeBtn.disabled = true;
+            statusEl.textContent = "Reading and analyzing your document...";
+            errorBox.style.display = "none";
+            results.style.display = "none";
+
+            const formData = new FormData();
+            formData.append("file", selectedFile);
+
+            try {
+                const res = await fetch(`${API_URL}/upload`, {
+                    method: "POST",
+                    body: formData
+                });
+
+                const data = await res.json();
+
+                if (!res.ok) {
+                    throw new Error(data.detail || "Something went wrong");
+                }
+
+                const result = data.result;
+                document.getElementById("docType").textContent = result.document_type || "Document";
+                document.getElementById("summary").textContent = result.summary || "—";
+
+                const list = document.getElementById("keyPoints");
+                list.innerHTML = "";
+                (result.key_points || []).forEach(point => {
+                    const li = document.createElement("li");
+                    li.textContent = point;
+                    list.appendChild(li);
+                });
+
+                results.style.display = "block";
+                statusEl.textContent = "";
+            } catch (err) {
+                errorBox.textContent = err.message;
+                errorBox.style.display = "block";
+                statusEl.textContent = "";
+            } finally {
+                analyzeBtn.disabled = false;
+            }
+        });
+    </script>
+
+</body>
+
+</html>
