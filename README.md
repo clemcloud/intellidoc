@@ -12,7 +12,7 @@ The application combines **containerized services** with **serverless event proc
 
 > **Watch the application in action:**
 
-*(Add your YouTube, Loom, or repository video link here.)*
+https://youtu.be/EkhCu01H2Ow
 
 ---
 
