@@ -80,10 +80,10 @@ Additional technical documentation is available in the `docs/` directory.
 
 | Document            | Description                                                                                                            |
 | ------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `backend.md`        | Backend architecture, extraction pipeline, Gemini integration, frontend, database, and local development workflow      |
-| `infrastructure.md` | AWS architecture, Terraform infrastructure, networking, deployment process, monitoring, and operational considerations |
-| `decisions.md`      | Architectural decisions, trade-offs, technology choices, and lessons learned                                           |
-| `challenges.md`     | Major technical challenges encountered during development and how they were resolved                                   |
+| `docs/backend.md`        | Backend architecture, extraction pipeline, Gemini integration, frontend, database, and local development workflow      |
+| `docs/infrastructure.md` | AWS architecture, Terraform infrastructure, networking, deployment process, monitoring, and operational considerations |
+                                    |
+| `docs/challenges.md`     | Major technical challenges encountered during development and how they were resolved                                   |
 
 ---
 
