@@ -1,29 +1,28 @@
 # IntelliDoc
 
-An AI-powered document processing platform that extracts text from uploaded PDF and DOCX files, generates intelligent summaries using Google's Gemini model, and stores processed results in PostgreSQL. The application is fully containerized and deployed on AWS using a serverless, event-driven architecture.
+An AI-powered document processing platform that extracts text from uploaded PDF and DOCX files, generates intelligent summaries using Google's Gemini model, and stores processed results in PostgreSQL.
+
+The application combines **containerized services** with **serverless event processing**, using Amazon ECS Fargate to host the FastAPI application while AWS Lambda asynchronously processes uploaded documents through an event-driven pipeline.
 
 ---
 
 ## Demo
 
-> **Screenshot:** IntelliDoc Homepage
+### Demo Video
 
-```markdown
-![Homepage](screenshots/demo.mp4)
-```
+> **Watch the application in action:**
 
-**Demo Video:** *(Add your YouTube or Loom link here)*
+*(Add your YouTube, Loom, or repository video link here.)*
 
 ---
 
 ## Architecture
 
-The application combines modern backend development with cloud-native infrastructure. Documents are uploaded through the FastAPI application, stored in Amazon S3, processed asynchronously by AWS Lambda, analyzed with Gemini, and persisted in Amazon RDS.
+IntelliDoc follows a hybrid cloud architecture that combines long-running containerized services with serverless event processing.
 
-> **Screenshot:** Architecture Diagram
+The user uploads a document through the FastAPI application running on Amazon ECS Fargate. The application stores the file in Amazon S3, which automatically triggers an AWS Lambda function. Lambda extracts the document text, sends it to the Google Gemini API for analysis, stores the processed result in Amazon RDS PostgreSQL, and the FastAPI application later retrieves the result when the client polls for completion.
 
-![Architecture](screenshots/architectural.png)
-
+![Architecture Diagram](screenshots/architectural.png)
 
 ---
 
@@ -32,12 +31,12 @@ The application combines modern backend development with cloud-native infrastruc
 * Upload PDF and DOCX documents
 * Automatic text extraction
 * AI-powered document summarization
-* Identification of key points
+* Key point extraction
 * Basic document classification
 * PostgreSQL persistence
 * Dockerized deployment
-* AWS serverless architecture
-* Infrastructure managed with Terraform
+* Event-driven document processing
+* Infrastructure as Code using Terraform
 * CloudWatch monitoring and logging
 
 ---
@@ -69,21 +68,20 @@ The application combines modern backend development with cloud-native infrastruc
 
 ### Infrastructure
 
-* Terraform
 * Docker
+* Terraform
 
 ---
 
 ## Project Documentation
 
-Additional technical documentation is available in the `docs/` directory.
+Detailed technical documentation is available inside the **docs** directory.
 
-| Document            | Description                                                                                                            |
-| ------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `docs/backend.md`        | Backend architecture, extraction pipeline, Gemini integration, frontend, database, and local development workflow      |
-| `docs/infrastructure.md` | AWS architecture, Terraform infrastructure, networking, deployment process, monitoring, and operational considerations |
-                                    |
-| `docs/challenges.md`     | Major technical challenges encountered during development and how they were resolved                                   |
+| Document                                                   | Description                                                                                                                              |
+| ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| **[Backend Documentation](docs/backend.md)**               | Backend architecture, extraction pipeline, Gemini integration, frontend implementation, database design, and local development workflow. |
+| **[Infrastructure Documentation](docs/infrastructure.md)** | AWS architecture, networking, Terraform infrastructure, deployment process, monitoring, and operational considerations.                  |
+| **[Challenges & Debugging](docs/challenges.md)**           | Major technical challenges encountered during development and how they were diagnosed and resolved.                                      |
 
 ---
 
@@ -91,20 +89,15 @@ Additional technical documentation is available in the `docs/` directory.
 
 ### Homepage
 
-
 ![Homepage](screenshots/homepage.png)
-
 
 ### Document Analysis
 
-
 ![Analysis Result](screenshots/file-analysis.png)
 
-### AWS Infrastructure
-
+### AWS Architecture
 
 ![AWS Architecture](screenshots/architectural.png)
-
 
 ---
 
@@ -153,15 +146,13 @@ http://127.0.0.1:8000
 
 ## Future Improvements
 
-* Amazon Bedrock integration
-* CI/CD with GitHub Actions
-* Application Load Balancer (ALB)
+* Integrate Amazon Bedrock as an alternative AI provider
 * HTTPS using AWS Certificate Manager
 * Route 53 custom domain
-* Auto Scaling for ECS services
-* Secrets Manager integration
+* ECS Service Auto Scaling
+* AWS Secrets Manager integration
 * CloudWatch dashboards and alarms
-* OCR support for scanned PDFs
+* OCR support for scanned PDF documents
 
 ---
 
@@ -171,7 +162,7 @@ http://127.0.0.1:8000
 
 Cloud Engineer | Backend Developer | AWS Solutions Architect Associate Candidate
 
-LinkedIn: *(Add your profile link)*
+**LinkedIn:** *www.linkedin.com/in/clementcloud*
 
 ---
 
