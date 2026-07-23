@@ -25,6 +25,6 @@ class Document(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
 
 
-# call this once to create the table if it doesn't exist yet
+
 def init_db():
     Base.metadata.create_all(bind=engine)
