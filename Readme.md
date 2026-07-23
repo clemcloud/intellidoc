@@ -8,9 +8,9 @@ An AI-powered document processing platform that extracts text from uploaded PDF 
 
 > **Screenshot:** IntelliDoc Homepage
 
-```markdown
+
 ![Homepage](screenshots/demo.mp4)
-```
+
 
 **Demo Video:** *(Add your YouTube or Loom link here)*
 
@@ -22,8 +22,9 @@ The application combines modern backend development with cloud-native infrastruc
 
 > **Screenshot:** Architecture Diagram
 
-![Architecture](screenshots/architectural.png)
-
+```markdown
+![System architecture diagram for IntelliDoc, showing documents uploaded through FastAPI, stored in Amazon S3, processed by AWS Lambda, analyzed with Gemini, and persisted in Amazon RDS in a serverless cloud workflow](screenshots/architecture.png)
+```
 
 ---
 
@@ -91,20 +92,19 @@ Additional technical documentation is available in the `docs/` directory.
 
 ### Homepage
 
-
-![Homepage](screenshots/homepage.png)
-
+![IntelliDoc homepage showing the application landing page with a polished document upload interface and a clean modern web design](screenshots/homepage.png)
 
 ### Document Analysis
 
 
-![Analysis Result](screenshots/file-analysis.png)
+![Document analysis results page displaying extracted content and summary information for a processed file in a structured report layout](screenshots/file-analysis.png)
+
 
 ### AWS Infrastructure
 
-
-![AWS Architecture](screenshots/architectural.png)
-
+```markdown
+![AWS infrastructure diagram for IntelliDoc, showing the cloud services and data flow involved in document processing, storage, and analysis](screenshots/architecture.png)
+```
 
 ---
 

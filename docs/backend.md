@@ -10,9 +10,8 @@ Before introducing any cloud infrastructure, the application was designed and va
 
 > **Screenshot:** IntelliDoc Homepage
 
-```markdown
+
 ![Homepage](../screenshots/homepage.png)
-```
 
 This approach made it much easier to isolate infrastructure-related issues later in the project because the application logic had already been thoroughly tested.
 
@@ -76,9 +75,9 @@ The overall request flow is illustrated below.
 
 > **Screenshot:** Upload Workflow
 
-```markdown
-![Upload Workflow](../screenshots/upload-page.png)
-```
+
+![Upload Workflow](../screenshots/homepage.png)
+
 
 ---
 
@@ -128,9 +127,9 @@ To avoid unnecessarily large requests, extracted text is truncated to approximat
 
 > **Screenshot:** Analysis Result
 
-```markdown
-![Analysis Result](../screenshots/analysis-result.png)
-```
+
+![Analysis Result](../screenshots/file-analysis.png)
+
 
 ---
 
@@ -165,9 +164,9 @@ documents
 
 > **Screenshot:** Documents Table
 
-```markdown
-![Database Table](../screenshots/postgres-table.png)
-```
+
+![Database Table](../screenshots/postgres.png)
+
 
 ---
 
@@ -197,9 +196,9 @@ The static files are served directly by FastAPI using `StaticFiles`, allowing bo
 
 > **Screenshot:** Homepage
 
-```markdown
+
 ![Homepage](../screenshots/homepage.png)
-```
+
 
 ---
 

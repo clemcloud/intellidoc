@@ -10,9 +10,9 @@ IntelliDoc follows an event-driven architecture deployed entirely on AWS. User r
 
 > **Screenshot:** Overall architecture diagram
 
-```markdown
-![Architecture Diagram](../screenshots/architecture.png)
-```
+
+![Architecture Diagram](../screenshots/architectural.png)
+
 
 ---
 
@@ -31,9 +31,9 @@ Amazon ECS Fargate hosts the FastAPI application without requiring EC2 instance 
 
 > **Screenshot:** ECS Cluster / Service
 
-```markdown
-![ECS Service](../screenshots/ecs-service.png)
-```
+
+![ECS Service](../screenshots/fargate.png)
+
 
 ---
 
@@ -49,9 +49,9 @@ Amazon Elastic Container Registry stores Docker images used by ECS deployments.
 
 > **Screenshot:** ECR Repository
 
-```markdown
-![Amazon ECR](../screenshots/ecr-repository.png)
-```
+
+![Amazon ECR](../screenshots/ecr-docker.png)
+
 
 ---
 
@@ -67,9 +67,9 @@ Uploaded documents are stored in an S3 bucket before processing.
 
 > **Screenshot:** S3 Bucket
 
-```markdown
-![Amazon S3](../screenshots/s3-bucket.png)
-```
+
+![Amazon S3](../screenshots/s3.png)
+
 
 ---
 
@@ -86,9 +86,13 @@ Lambda processes uploaded documents after S3 events are triggered. It extracts t
 
 > **Screenshot:** Lambda Function
 
-```markdown
-![AWS Lambda](../screenshots/lambda-console.png)
-```
+
+![AWS Lambda](../screenshots/lambda.png)
+
+
+![AWS Lambda](../screenshots/lambda2.png)
+
+
 
 ---
 
@@ -105,9 +109,9 @@ Amazon RDS stores processed document metadata and AI analysis results.
 
 > **Screenshot:** RDS Instance
 
-```markdown
-![Amazon RDS](../screenshots/rds-console.png)
-```
+
+![Amazon RDS](../screenshots/rds.png)
+
 
 ---
 
@@ -130,13 +134,7 @@ CloudWatch provides centralized logging and monitoring for ECS tasks and Lambda 
 
 It was primarily used during development to diagnose deployment failures and verify successful document processing.
 
-> **Screenshot:** CloudWatch Logs
 
-```markdown
-![CloudWatch Logs](../screenshots/cloudwatch-logs.png)
-```
-
----
 
 # Networking
 
@@ -177,9 +175,9 @@ This modular approach makes individual infrastructure components easier to modif
 
 > **Screenshot:** Terraform Apply
 
-```markdown
-![Terraform Apply](../screenshots/terraform-apply.png)
-```
+
+![Terraform Apply](../screenshots/terraform.png)
+
 
 ---
 
